@@ -1,0 +1,1 @@
+print("eyes/600.500.0.jpg".split("."))
