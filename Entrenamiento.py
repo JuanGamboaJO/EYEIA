@@ -57,9 +57,9 @@ def trainModel():
     # model.cuda()
 
     criterion = nn.MSELoss()
-    optimizer = torch.optim.SGD(model.parameters(), lr=0.001, momentum=0.9,weight_decay=0.001)
-    #optimizer = torch.optim.Adam(model.parameters(), lr=0.001)
-    scheduler = CyclicLR(optimizer, base_lr=0.001, max_lr=0.01, mode='triangular')
+    #optimizer = torch.optim.SGD(model.parameters(), lr=0.001, momentum=0.9)
+    optimizer = torch.optim.Adam(model.parameters(), lr=0.001)
+    #scheduler = CyclicLR(optimizer, base_lr=0.001, max_lr=0.01, mode='triangular')
 
     bestModel = model
     bestScore = 10000
@@ -72,7 +72,6 @@ def trainModel():
         np.random.shuffle(trainingSet)
 
         for i,(im, label) in enumerate(trainingSet):
-
             output = model(im)
             #output = torch.mean(output, dim=1, keepdim=True)
             loss = criterion(output, label)
@@ -81,11 +80,11 @@ def trainModel():
 
     
             #  Ajustar la tasa de aprendizaje
-            scheduler.step()
+            #scheduler.step()
             optimizer.zero_grad()
     
             # Reiniciar los gradientes
-            if (i+1) % 2430 == 0:
+            if (i+1) % 1620 == 0:
                 # testSc = evaluateModel(model,test,sidelen=900)
                 testSc = evaluateModel(model,test)
                 # trainSc = evaluateModel(model,trainingSet,sidelen=900)
