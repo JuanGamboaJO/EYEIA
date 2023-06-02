@@ -153,7 +153,7 @@ def pruebatoma(folder="eyes"):
         pyautogui.moveTo(i, j)
         getEye(times=1, coords=(i, j), counterStart=60, folder=folder)
 
-contador=0
+contador=40
 #primeratoma(tomas=contador)
 #segundatoma(tomas=contador)
 #terceratoma(tomas=contador)
@@ -169,7 +169,7 @@ contador=0
 #pruebatoma()
 
 ###-----------TEST------##
-primeratoma(folder="testeyes",tomas=contador)
+#primeratoma(folder="testeyes",tomas=contador)
 #segundatoma(folder="testeyes",tomas=contador)
 #terceratoma(folder="testeyes",tomas=contador)
 #cuartatoma(folder="testeyes",tomas=contador)

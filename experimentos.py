@@ -97,7 +97,7 @@ testizquierdo = dataLoad("testeyesizquierdo")
 testderecho = dataLoad("testeyesderecho")
 
 
-num_epochs = 10
+num_epochs = 20
 bigTest = []
 bigTrain = []
 
