@@ -8,7 +8,6 @@ import random
 
 pyautogui.FAILSAFE=False
 def getEye(times = 1,frameShrink = 0.15, coords = (0,0), counterStart = 0, folder = "eyes"):
-    os.makedirs(folder, exist_ok=True)
     webcam = cv.VideoCapture(0)
     counter = counterStart
     ims = []
@@ -145,7 +144,7 @@ def onceavatoma(tomas,folder="ojo"):
     
 
 def pruebatoma(folder="eyes"):
-    coords_list = [(764, 621)]
+    coords_list = [(465, 750)]
     for i, j in coords_list:
         print(i, j)
         pyautogui.moveTo(i, j)
