@@ -69,25 +69,25 @@ def eyetrack(xshift = 30, yshift=150, frameShrink = 0.15):
             x=x.item()*1600
             
 
-            avx = sum(mvAvgx)/scale
-            print(avx)
+            # avx = sum(mvAvgx)/scale
+            # print(avx)
 
-            mvAvgx.append(x)
+            # mvAvgx.append(x)
 
-            if len(mvAvgx) >= scale:
-                if abs(avx-x) > margin :
-                    mvAvgx = mvAvgx[5:]
-                else:
-                    if abs(avx-x) > margin2:
-                        mvAvgx = mvAvgx[1:]
-                    else:
-                        mvAvgx.pop()
+            # if len(mvAvgx) >= scale:
+            #     if abs(avx-x) > margin :
+            #         mvAvgx = mvAvgx[5:]
+            #     else:
+            #         if abs(avx-x) > margin2:
+            #             mvAvgx = mvAvgx[1:]
+            #         else:
+            #             mvAvgx.pop()
 
                 # else:
                 #     mvAvgx = mvAvgx[1:]
                 #     mvAvgy = mvAvgy[1:]
                 #pyautogui.moveTo(800,450)
-                pyautogui.moveTo(avx,450)
+            pyautogui.moveTo(x,450)
  
 
     # top = max([max(x) for x in im])
