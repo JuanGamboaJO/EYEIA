@@ -50,7 +50,7 @@ def primeratoma(tomas,folder="ojo"):
         pyautogui.moveTo(i, j)
         input("Press Enter to continue...")
         pyautogui.moveTo(i, j)
-        getEye(times=10, coords=(i, j), counterStart=tomas, folder=folder)
+        getEye(times=20, coords=(i, j), counterStart=tomas, folder=folder)
 
 def segundatoma(tomas,folder="ojo"):
     coords_list = [(100, 50),(800, 50),(1500, 50),(100, 450),(1500, 450),(100, 850),(800, 850),(1500, 850)]
@@ -59,7 +59,7 @@ def segundatoma(tomas,folder="ojo"):
         pyautogui.moveTo(i, j)
         input("Press Enter to continue...")
         pyautogui.moveTo(i, j)
-        getEye(times=10, coords=(i, j), counterStart=tomas, folder=folder)
+        getEye(times=20, coords=(i, j), counterStart=tomas, folder=folder)
 
 def terceratoma(tomas,folder="ojo"):
     coords_list = [(200, 100),(800, 100),(1400, 100),(200, 450),(1400, 450),(200, 800),(800, 800),(1400, 800)]
@@ -68,7 +68,7 @@ def terceratoma(tomas,folder="ojo"):
         pyautogui.moveTo(i, j)
         input("Press Enter to continue...")
         pyautogui.moveTo(i, j)
-        getEye(times=10, coords=(i, j), counterStart=tomas, folder=folder)
+        getEye(times=20, coords=(i, j), counterStart=tomas, folder=folder)
 
 def cuartatoma(tomas,folder="ojo"):
     coords_list = [(300, 150),(800, 150),(1300, 150),(300, 450),(1300, 450),(300, 750),(800, 750),(1300, 750)]
@@ -77,7 +77,7 @@ def cuartatoma(tomas,folder="ojo"):
         pyautogui.moveTo(i, j)
         input("Press Enter to continue...")
         pyautogui.moveTo(i, j)
-        getEye(times=10, coords=(i, j), counterStart=tomas, folder=folder)
+        getEye(times=20, coords=(i, j), counterStart=tomas, folder=folder)
 
 def quintatoma(tomas,folder="ojo"):
     coords_list = [(400, 200),(800, 200),(1200, 200),(400, 450),(1200, 450),(400, 700),(800, 700),(1200, 700)]
@@ -86,7 +86,7 @@ def quintatoma(tomas,folder="ojo"):
         pyautogui.moveTo(i, j)
         input("Press Enter to continue...")
         pyautogui.moveTo(i, j)
-        getEye(times=10, coords=(i, j), counterStart=tomas, folder=folder)
+        getEye(times=20, coords=(i, j), counterStart=tomas, folder=folder)
 
 def sextatoma(tomas,folder="ojo"):
     coords_list = [(500, 250),(800, 250),(1100, 250),(500, 450),(1100, 450),(500, 650),(800, 650),(1100, 650)]
@@ -95,7 +95,7 @@ def sextatoma(tomas,folder="ojo"):
         pyautogui.moveTo(i, j)
         input("Press Enter to continue...")
         pyautogui.moveTo(i, j)
-        getEye(times=10, coords=(i, j), counterStart=tomas, folder=folder)
+        getEye(times=20, coords=(i, j), counterStart=tomas, folder=folder)
 
 def septimatoma(tomas,folder="ojo"):
     coords_list = [(100,300 ),(250, 300),(400, 300),(100,600),(250, 600),(400, 600)]
@@ -104,7 +104,7 @@ def septimatoma(tomas,folder="ojo"):
         pyautogui.moveTo(i, j)
         input("Press Enter to continue...")
         pyautogui.moveTo(i, j)
-        getEye(times=10, coords=(i, j), counterStart=tomas, folder=folder)
+        getEye(times=20, coords=(i, j), counterStart=tomas, folder=folder)
 
 def octavatoma(tomas,folder="ojo"):
     coords_list = [(1500,300 ),(1350, 300),(1200, 300),(1500,600),(1350, 600),(1200, 600)]
@@ -113,7 +113,7 @@ def octavatoma(tomas,folder="ojo"):
         pyautogui.moveTo(i, j)
         input("Press Enter to continue...")
         pyautogui.moveTo(i, j)
-        getEye(times=10, coords=(i, j), counterStart=tomas, folder=folder)
+        getEye(times=20, coords=(i, j), counterStart=tomas, folder=folder)
 
 def novenatoma(tomas,folder="ojo"):
     coords_list = [(600,200 ),(600, 125),(600, 50),(600,700),(600, 775),(600, 850)]
@@ -122,7 +122,7 @@ def novenatoma(tomas,folder="ojo"):
         pyautogui.moveTo(i, j)
         input("Press Enter to continue...")
         pyautogui.moveTo(i, j)
-        getEye(times=10, coords=(i, j), counterStart=tomas, folder=folder)
+        getEye(times=20, coords=(i, j), counterStart=tomas, folder=folder)
 
 def decimatoma(tomas,folder="ojo"):
     coords_list = [(1000,200 ),(1000, 125),(1000, 50),(1000,700),(1000, 775),(1000, 850)]
@@ -131,7 +131,7 @@ def decimatoma(tomas,folder="ojo"):
         pyautogui.moveTo(i, j)
         input("Press Enter to continue...")
         pyautogui.moveTo(i, j)
-        getEye(times=10, coords=(i, j), counterStart=tomas, folder=folder)
+        getEye(times=20, coords=(i, j), counterStart=tomas, folder=folder)
 
 def onceavatoma(tomas,folder="ojo"):
     coords_list = [(600, 300),(600, 600),(1000, 600),(1000, 300),(600, 450),(1000, 450),(800, 300),(800, 600)]
@@ -140,7 +140,7 @@ def onceavatoma(tomas,folder="ojo"):
         pyautogui.moveTo(i, j)
         input("Press Enter to continue...")
         pyautogui.moveTo(i, j)
-        getEye(times=10, coords=(i, j), counterStart=tomas, folder=folder)
+        getEye(times=20, coords=(i, j), counterStart=tomas, folder=folder)
     
 
 def pruebatoma(folder="eyes"):
@@ -152,8 +152,8 @@ def pruebatoma(folder="eyes"):
         pyautogui.moveTo(i, j)
         getEye(times=1, coords=(i, j), counterStart=60, folder="prueba")
 
-contador=60
-#primeratoma(tomas=contador)
+contador=80
+primeratoma(tomas=contador)
 #segundatoma(tomas=contador)
 #terceratoma(tomas=contador)
 #cuartatoma(tomas=contador)
@@ -165,7 +165,7 @@ contador=60
 #decimatoma(tomas=contador)
 #onceavatoma(tomas=contador)
 
-pruebatoma()
+#pruebatoma()
 
 ###-----------TEST------##
 #primeratoma(folder="testeyes",tomas=contador)
