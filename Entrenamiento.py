@@ -87,11 +87,11 @@ def trainModel():
             scheduler.step()
             optimizer.zero_grad()
     
-            if (i+1) % 2520 == 0:
-                #testSc = evaluateModel(model,testderecho,testizquierdo,sidelen=900)
-                testSc = evaluateModel(model,testderecho,testizquierdo)
-                #trainSc = evaluateModel(model,trainingSet_Derecho,trainingSet_izquierdo,sidelen=900)
-                trainSc = evaluateModel(model,trainingSet_Derecho,trainingSet_izquierdo)
+            if (i+1) % len(trainingSet_Derecho)/2 == 0:
+                testSc = evaluateModel(model,testderecho,testizquierdo,sidelen=900)
+                #testSc = evaluateModel(model,testderecho,testizquierdo)
+                trainSc = evaluateModel(model,trainingSet_Derecho,trainingSet_izquierdo,sidelen=900)
+                #trainSc = evaluateModel(model,trainingSet_Derecho,trainingSet_izquierdo)
                 if testSc < bestScore:
                     bestModel = copy.deepcopy(model)
                     bestScore = testSc
@@ -107,12 +107,12 @@ def trainModel():
     bigTest.append(testscores)
     bigTrain.append(trainscores)
 
-    finalScore = evaluateModel(bestModel,testderecho,testizquierdo)
-    #finalScore = evaluateModel(bestModel,testderecho,testizquierdo,sidelen=900)
+    #finalScore = evaluateModel(bestModel,testderecho,testizquierdo)
+    finalScore = evaluateModel(bestModel,testderecho,testizquierdo,sidelen=900)
     print(finalScore)
 
     if finalScore < 150:
-        torch.save(bestModel.state_dict(), "xModels/" + str(int(finalScore))+".plt")
+        torch.save(bestModel.state_dict(), "yModels/" + str(int(finalScore))+".plt")
 
 
 
