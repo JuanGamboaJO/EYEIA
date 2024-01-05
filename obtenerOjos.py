@@ -7,7 +7,7 @@ import copy
 import random
 
 pyautogui.FAILSAFE=False
-def getEye(times = 1,frameShrink = 0.15, coords = (0,0), counterStart = 0, folder = "eyes"):
+def getEye(times = 1,frameShrink = 0.15, coords = (0,0), counterStart = 0, folder = "ojo"):
     webcam = cv.VideoCapture(0)
     counter = counterStart
     ims = []
@@ -152,8 +152,8 @@ def pruebatoma(folder="eyes"):
         pyautogui.moveTo(i, j)
         getEye(times=1, coords=(i, j), counterStart=60, folder="prueba")
 
-contador=80
-primeratoma(tomas=contador)
+contador=60
+#primeratoma(tomas=contador)
 #segundatoma(tomas=contador)
 #terceratoma(tomas=contador)
 #cuartatoma(tomas=contador)
@@ -163,7 +163,7 @@ primeratoma(tomas=contador)
 #octavatoma(tomas=contador)
 #novenatoma(tomas=contador)
 #decimatoma(tomas=contador)
-#onceavatoma(tomas=contador)
+onceavatoma(tomas=contador)
 
 #pruebatoma()
 

@@ -40,7 +40,7 @@ def dataLoad(path, want = 0):
 
 def eyetrack(xshift = 30, yshift=150, frameShrink = 0.15):
     model= ConvNet().to(device)
-    model.load_state_dict(torch.load("xModels/41.plt",map_location=device))
+    model.load_state_dict(torch.load("xModels/Sujetos_3_64.plt",map_location=device))
     model.eval()
     mvAvgx = []
     scale = 10
