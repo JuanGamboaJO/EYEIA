@@ -40,7 +40,7 @@ def dataLoad(path, want = 0):
 
 def eyetrack(xshift = 30, yshift=150, frameShrink = 0.15):
     model= ConvNet().to(device)
-    model.load_state_dict(torch.load("xModels/Sujetos_3_64.plt",map_location=device))
+    model.load_state_dict(torch.load("xModels/Sujetos_4_38_kernel_5.plt",map_location=device))
     model.eval()
     mvAvgx = []
     scale = 10
@@ -67,27 +67,10 @@ def eyetrack(xshift = 30, yshift=150, frameShrink = 0.15):
 
             x=model(right_eye,left_eye)
             x=x.item()*1600
-            
+    
 
-            avx = sum(mvAvgx)/scale
-            print(avx)
-
-            mvAvgx.append(x)
-
-            if len(mvAvgx) >= scale:
-                if abs(avx-x) > margin:
-                    mvAvgx = mvAvgx[5:]
-                else:
-                    if abs(avx-x) > margin2:
-                        mvAvgx = mvAvgx[1:]
-                    else:
-                        mvAvgx.pop()
-            # else:
-            #     mvAvgx = mvAvgx[1:]
-                #mvAvgy = mvAvgy[1:]
-            # pyautogui.moveTo(800,450)
                 
-            pyautogui.moveTo(avx,450)
+            pyautogui.moveTo(x,450)
  
 
     # top = max([max(x) for x in im])

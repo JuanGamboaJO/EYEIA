@@ -11,6 +11,8 @@ import matplotlib.pyplot as plt
 from maxMin import maxAndMin
 from conv2Net import ConvNet
 from torch.optim.lr_scheduler import CyclicLR
+import pandas as pd
+
 
 device = torch.device('cuda:0' if torch.cuda.is_available() else 'cpu')
 
@@ -31,7 +33,7 @@ def dataLoad(path, want = 0):
         totalHolder.append(((torch.tensor([[im]]).to(dtype=torch.float,device=device))/top,
                             torch.tensor([[int((name.split("."))[want])/dims[want]]]).to(dtype=torch.float,device=device)))
 
-    # print(totalHolder)
+    # print(totalHolder)/
     return totalHolder
 
 def evaluateModel(model,testSetderecho,testsetizquierdo, sidelen = 1600):
@@ -51,9 +53,9 @@ testizquierdo = dataLoad("testeyesizquierdo")
 testderecho = dataLoad("testeyesderecho")
 
 
-num_epochs = 20
-bigTest = []
-bigTrain = []
+num_epochs = 30
+early_stopping_patience = 10  # Número de épocas para esperar antes de aplicar "early stopping"
+early_stopping_counter = 0
 
 def trainModel():
     model = ConvNet().to(device)
@@ -68,10 +70,14 @@ def trainModel():
     bestScore = 10000
     testscores = []
     trainscores = []
+    trainlossscore=[]
+    testlossscore=[]
 
     model.train()
+
     for epoch in range(num_epochs):
         print(epoch)
+        np.random.seed(1)
         np.random.shuffle(trainingSet_Derecho)
         np.random.shuffle(trainingSet_izquierdo)
 
@@ -82,38 +88,62 @@ def trainModel():
             loss.backward()
             optimizer.step()
 
-    
             #  Ajustar la tasa de aprendizaje
             scheduler.step()
             optimizer.zero_grad()
     
             if (i+1) % len(trainingSet_Derecho)/2 == 0:
-                testSc = evaluateModel(model,testderecho,testizquierdo,sidelen=900)
-                #testSc = evaluateModel(model,testderecho,testizquierdo)
-                trainSc = evaluateModel(model,trainingSet_Derecho,trainingSet_izquierdo,sidelen=900)
-                #trainSc = evaluateModel(model,trainingSet_Derecho,trainingSet_izquierdo)
+                #testSc = evaluateModel(model,testderecho,testizquierdo,sidelen=900)
+                testSc = evaluateModel(model,testderecho,testizquierdo)
+                #trainSc = evaluateModel(model,trainingSet_Derecho,trainingSet_izquierdo,sidelen=900)
+                trainSc = evaluateModel(model,trainingSet_Derecho,trainingSet_izquierdo)
                 if testSc < bestScore:
                     bestModel = copy.deepcopy(model)
                     bestScore = testSc
-          
+                    early_stopping_counter = 0  # Reiniciar el contador si hay mejora
+                else:
+                    early_stopping_counter += 1
+
                 testscores.append(testSc)
                 trainscores.append(trainSc)
+                trainlossscore.append(loss.item())
 
-                print(trainSc)
-                print(testSc)
+                print(f'Train Accuracy: {trainSc:.4f}')
+                print(f'Test Accuracy: {testSc:.4f}')
                 print ('Epoch [{}/{}], Step [{}/{}], Loss: {:.4f}'
                        .format(epoch+1, num_epochs, i+1, len(trainingSet_Derecho), loss.item()))
+        
+        for i,((im, label),(im2,label2)) in enumerate(zip(testderecho,testizquierdo)):
+            output2 = model(im,im2)
+            #output = torch.mean(output, dim=1, keepdim=True)
+            losstest = criterion(output2, label)
+            
+            if (i+1) % len(testderecho)/2 == 0:
+                testlossscore.append(losstest.item())
+            
+                
+        if early_stopping_counter >= early_stopping_patience:
+            print(f'Early stopping at epoch {epoch + 1} as there is no improvement in validation score.')
+            break
 
-    bigTest.append(testscores)
-    bigTrain.append(trainscores)
+    df = pd.DataFrame({
+        'Epoch': list(range(1,num_epochs+ 1)),
+        'Train Accuracy': trainscores,
+        'Test Accuracy': testscores,
+        'Train loss': trainlossscore,
+        'Test Loss': testlossscore
+    })
 
-    #finalScore = evaluateModel(bestModel,testderecho,testizquierdo)
-    finalScore = evaluateModel(bestModel,testderecho,testizquierdo,sidelen=900)
+    # Guardar el DataFrame en un archivo Excel
+    df.to_excel('results.xlsx', index=False)
+        
+
+    finalScore = evaluateModel(bestModel,testderecho,testizquierdo)
+    #finalScore = evaluateModel(bestModel,testderecho,testizquierdo,sidelen=900)
     print(finalScore)
 
     if finalScore < 150:
-        torch.save(bestModel.state_dict(), "yModels/" + str(int(finalScore))+".plt")
-
+        torch.save(bestModel.state_dict(), "xModels/" + str(int(finalScore))+".plt")
 
 
 trainModel()
