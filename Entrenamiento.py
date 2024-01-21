@@ -126,16 +126,16 @@ def trainModel():
             print(f'Early stopping at epoch {epoch + 1} as there is no improvement in validation score.')
             break
 
-    df = pd.DataFrame({
-        'Epoch': list(range(1,num_epochs+ 1)),
-        'Train Accuracy': trainscores,
-        'Test Accuracy': testscores,
-        'Train loss': trainlossscore,
-        'Test Loss': testlossscore
-    })
+    #df = pd.DataFrame({
+    #    'Epoch': list(range(1,num_epochs+ 1)),
+    #    'Train Accuracy': trainscores,
+    #    'Test Accuracy': testscores,
+    #    'Train loss': trainlossscore,
+    #    'Test Loss': testlossscore
+    #})
 
     # Guardar el DataFrame en un archivo Excel
-    df.to_excel('results.xlsx', index=False)
+    #df.to_excel('results.xlsx', index=False)
         
 
     finalScore = evaluateModel(bestModel,testderecho,testizquierdo)

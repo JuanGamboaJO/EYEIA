@@ -4,13 +4,13 @@ import torch
 class ConvNet(nn.Module):
     def __init__(self):
         super(ConvNet, self).__init__()
-        self.conv1 = nn.Conv2d(1, 32, kernel_size=5, stride=1, padding=1)
+        self.conv1 = nn.Conv2d(1, 32, kernel_size=7, stride=1, padding=1)
         self.relu1 = nn.ReLU()
         self.maxpool1 = nn.MaxPool2d(kernel_size=2, stride=2)
-        self.conv2 = nn.Conv2d(32, 64, kernel_size=5, stride=1, padding=1)
+        self.conv2 = nn.Conv2d(32, 64, kernel_size=7, stride=1, padding=1)
         self.relu2 = nn.ReLU()
         self.maxpool2 = nn.MaxPool2d(kernel_size=2, stride=2)
-        self.fc1 = nn.Linear(32384, 81)  # Adjusted input size for 100x50 images
+        self.fc1 = nn.Linear(25344, 81)  # Adjusted input size for 100x50 images
         self.relu3 = nn.ReLU()
         self.fc2 = nn.Linear(81, 1)
         self.dropout=nn.Dropout(0.2)
