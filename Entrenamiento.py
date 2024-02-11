@@ -15,7 +15,8 @@ import pandas as pd
 
 
 device = torch.device('cuda:0' if torch.cuda.is_available() else 'cpu')
-
+print(device)
+torch.cuda.empty_cache()
 
 def dataLoad(path, want = 0):
     nameList = os.listdir(path)
@@ -93,10 +94,10 @@ def trainModel():
             optimizer.zero_grad()
     
             if (i+1) % len(trainingSet_Derecho)/2 == 0:
-                #testSc = evaluateModel(model,testderecho,testizquierdo,sidelen=900)
-                testSc = evaluateModel(model,testderecho,testizquierdo)
-                #trainSc = evaluateModel(model,trainingSet_Derecho,trainingSet_izquierdo,sidelen=900)
-                trainSc = evaluateModel(model,trainingSet_Derecho,trainingSet_izquierdo)
+                testSc = evaluateModel(model,testderecho,testizquierdo,sidelen=900)
+                #testSc = evaluateModel(model,testderecho,testizquierdo)
+                trainSc = evaluateModel(model,trainingSet_Derecho,trainingSet_izquierdo,sidelen=900)
+                #trainSc = evaluateModel(model,trainingSet_Derecho,trainingSet_izquierdo)
                 if testSc < bestScore:
                     bestModel = copy.deepcopy(model)
                     bestScore = testSc
@@ -122,24 +123,25 @@ def trainModel():
                 testlossscore.append(losstest.item())
             
                 
-        if early_stopping_counter >= early_stopping_patience:
-            print(f'Early stopping at epoch {epoch + 1} as there is no improvement in validation score.')
-            break
+    print(len(trainscores))
+    print(len(testscores))
+    print(len(trainlossscore))
+    print(len(testlossscore))
 
-    #df = pd.DataFrame({
-    #    'Epoch': list(range(1,num_epochs+ 1)),
-    #    'Train Accuracy': trainscores,
-    #    'Test Accuracy': testscores,
-    #    'Train loss': trainlossscore,
-    #    'Test Loss': testlossscore
-    #})
+    df = pd.DataFrame({
+        'Epoch': list(range(1,num_epochs+ 1)),
+        'Train Accuracy': trainscores,
+        'Test Accuracy': testscores,
+        'Train loss': trainlossscore,
+        'Test Loss': testlossscore
+    })
 
     # Guardar el DataFrame en un archivo Excel
-    #df.to_excel('results.xlsx', index=False)
+    df.to_excel('results.xlsx', index=False)
         
 
-    finalScore = evaluateModel(bestModel,testderecho,testizquierdo)
-    #finalScore = evaluateModel(bestModel,testderecho,testizquierdo,sidelen=900)
+    #finalScore = evaluateModel(bestModel,testderecho,testizquierdo)
+    finalScore = evaluateModel(bestModel,testderecho,testizquierdo,sidelen=900)
     print(finalScore)
 
     if finalScore < 150:
